@@ -1,19 +1,8 @@
-const express = require("express");
-const path = require("path");
-const fs = require("fs");
-const { v4: uuidv4 } = require('uuid');
-
-const app = express();
-const port = 8080;
-
-app.use(express.static('public'));
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
+const fs = require('fs');
+const path = require('path');
 
 const mainDir = path.join(__dirname, "/public");
 
-// //Require routes file
-// require('./routes/routes')(app);
 
 app.get("/notes", function(req, res) {
     res.sendFile(path.join(mainDir, "notes.html"));
@@ -35,9 +24,8 @@ app.get("*", function(req, res) {
 app.post("/api/notes", function(req, res) {
     let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
     let newNote = req.body;
-    // let uniqueID = (savedNotes.length).toString();
-    // newNote.id = uniqueID;
-    newNote.id = uuidv4();
+    let uniqueID = (savedNotes.length).toString();
+    newNote.id = uniqueID;
     savedNotes.push(newNote);
 
     fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
@@ -61,8 +49,4 @@ app.delete("/api/notes/:id", function(req, res) {
 
     fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
     res.json(savedNotes);
-})
-
-app.listen(port, function() {
-    console.log(`Now listening to port ${port}. Enjoy your stay!`);
 })
