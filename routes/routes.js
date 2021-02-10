@@ -3,11 +3,11 @@ const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 
 
-// const mainDir = path.join(__dirname, "/../public");
+const mainDir = path.join(__dirname, "/../public");
 
 module.exports = function (app) {
     app.get("/notes", function(req, res) {
-        res.sendFile(path.join(__dirname, "../public/notes.html"));
+        res.sendFile(path.join(mainDir, "/notes.html"));
     });
 
     app.get("/api/notes", function(req, res) {
