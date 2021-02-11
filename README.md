@@ -6,6 +6,9 @@
   ## Description
 🔍 This is a note taking application designed to write, save, and delete notes written to and retrieved from a backend JSON file.
 
+  [Heroku deployed app](https://cryptic-atoll-80509.herokuapp.com)
+
+
   ## Table of Contents
   - [Description](#description)
   - [Installation](#installation)
